@@ -3,7 +3,7 @@ total = 0
 
 filename = input('Enter the file name: ')
 try:
-    filehand = open(filename)
+    fhand = open(filename)
 except FileNotFoundError:
     print('File cannot be opened: ', filename)
     quit()
