@@ -1,20 +1,41 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 count = 0
-total = 0
+sum=0
 
-filename = input('Enter the file name: ')
+fname = input("enter file name: ")
 try:
-    filehand = open(filename)
-except FileNotFoundError:
-    print('File cannot be opened: ', filename)
-    quit()
+    fhand = open(fname) 
+    for line in fhand: 
+        if line.startswith('X-DSPAM-Confidence:'): 
+            apos = line.find(':')
+            bpos = line.find('.',apos)
+            substr=line[apos+2:bpos+5]
+            substr = float(substr)
+            sum = sum+substr
+            count = count+1
+    print("average X-DSPAM-Confidence: ", sum/count)
+    
+except:
+    print("file doesn't exists")
 
-for line in fhand:
-    if line.startswith('X-DSPAM-Confidence: '):
-        count = count + 1
-        colpos = line.find(':')
-        number = line[colpos+1:].strip()
-        SPAM_C = float(number)
-        total = total + SPAM_C
 
-average = total / count
-print('Average spam confidence: ', average)
+        
+        
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
